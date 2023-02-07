@@ -7,6 +7,15 @@ public class Entity {
 	private int Defense;
 	private int Speed;
 	
+	public Entity(int x, int y, int hp, int attack, int defense, int speed) {
+		this.X = x;
+		this.Y = y;
+		this.HP = hp;
+		this.Attack = attack;
+		this.Defense = defense;
+		this.Speed = speed;
+	}
+
 // Getters
 	public int getX(){
 		return X;
@@ -41,8 +50,8 @@ public class Entity {
 		this.Y = Y;
 	}
 		
-	public void setHP(int HP){
-		this.HP = HP;
+	public void setHP(int hp){
+		this.HP = hp;
 	}
 
 	public void setAttack(int Attack){
