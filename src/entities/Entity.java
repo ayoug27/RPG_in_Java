@@ -3,67 +3,55 @@ public class Entity {
 	private int X;
 	private int Y;
 	private int HP;
-	private int Attack;
-	private int Defense;
-	private int Speed;
-	
-	public Entity(int x, int y, int hp, int attack, int defense, int speed) {
-		this.X = x;
-		this.Y = y;
-		this.HP = hp;
-		this.Attack = attack;
-		this.Defense = defense;
-		this.Speed = speed;
+	private int baseAttack;
+	private int baseDefense;
+	private int baseSpeed;
+		
+	public Entity(int x, int y, int hP, int baseAttack, int baseDefense, int baseSpeed) {
+		super();
+		X = x;
+		Y = y;
+		HP = hP;
+		this.baseAttack = baseAttack;
+		this.baseDefense = baseDefense;
+		this.baseSpeed = baseSpeed;
 	}
-
-// Getters
-	public int getX(){
+	
+	public int getX() {
 		return X;
 	}
-	
-	public int getY(){
+	public void setX(int x) {
+		X = x;
+	}
+	public int getY() {
 		return Y;
 	}
-	
-	public int getHP(){
+	public void setY(int y) {
+		Y = y;
+	}
+	public int getHP() {
 		return HP;
 	}
-	
-	public int getAttack(){
-		return Attack;
+	public void setHP(int hP) {
+		HP = hP;
 	}
-	
-	public int getDefense(){
-		return Defense;
+	public int getBaseAttack() {
+		return baseAttack;
 	}
-	
-	public int getSpeed(){
-		return Speed;
+	public void setBaseAttack(int baseAttack) {
+		this.baseAttack = baseAttack;
 	}
-
-// Setters
-	public void setX(int X){
-		this.X = X;
+	public int getBaseDefense() {
+		return baseDefense;
 	}
-	
-	public void setY(int Y){
-		this.Y = Y;
+	public void setBaseDefense(int baseDefense) {
+		this.baseDefense = baseDefense;
 	}
-		
-	public void setHP(int hp){
-		this.HP = hp;
+	public int getBaseSpeed() {
+		return baseSpeed;
 	}
-
-	public void setAttack(int Attack){
-		this.Attack = Attack;
-	}	
-	
-	public void setDefense(int defense) {
-		Defense = defense;
+	public void setBaseSpeed(int baseSpeed) {
+		this.baseSpeed = baseSpeed;
 	}
-
-	public void setSpeed(int speed) {
-		Speed = speed;
-	}	
 }	
 
