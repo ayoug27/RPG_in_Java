@@ -4,6 +4,12 @@ public class Artefact extends Item{
 	private String buffedAbility;
 	private int buffValue;
 	
+	public Artefact(int id, String name, String rarity, String buffedAbility, int buffValue) {
+		super(id, name, rarity);
+		this.buffedAbility = buffedAbility;
+		this.buffValue = buffValue;
+	}
+	
 	public String getBuffedAbility() {
 		return buffedAbility;
 	}
@@ -17,5 +23,8 @@ public class Artefact extends Item{
 		this.buffValue = buffValue;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return getName()+ " : \n" + buffedAbility + " : +" + this.buffValue;
+	}
 }

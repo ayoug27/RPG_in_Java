@@ -1,5 +1,4 @@
 package entities;
-import java.util.*;
 import items.*;
 
 public class Inventory {
@@ -72,7 +71,7 @@ public class Inventory {
 		}
 	}
 	
-	public void dropWeaponInPocket(int i)
+	public void dropWeapon(int i)
 	{
 		int I = i-1;
 		if (i <= itemsInWeaponsPocket || weaponsPocket[I] != null) {
@@ -105,7 +104,7 @@ public class Inventory {
 		}
 	}
 	
-	public void dropPotionInPocket(int i)
+	public void dropPotion(int i)
 	{
 		int I = i-1;
 		if (i <= itemsInPotionsPocket || potionsPocket[I] != null) {
@@ -114,6 +113,39 @@ public class Inventory {
 			}
 			potionsPocket[itemsInPotionsPocket-1] = null;
 			--itemsInPotionsPocket;
+		}
+		else 
+			System.err.println("Vous n'avez pas d'objet à cet emplacement !");
+	}
+	
+	public void addArtefactInPocket(items.Artefact artefactToAdd)
+	{
+		if (itemsInArtefactsPocket < artefactsPocket.length) {
+			this.artefactsPocket[itemsInArtefactsPocket] = artefactToAdd;
+			++this.itemsInArtefactsPocket;
+		}
+		else
+			System.err.println("Votre poche est remplie !");
+	}
+	
+	public items.Artefact accessArtefactInPocket(int i) {
+		if (i <= itemsInArtefactsPocket)
+			return this.artefactsPocket[i-1];
+		else {
+			System.err.println("Vous n'avez pas d'objet à cet emplacement ! Voici le dernier objet que vous avez récupéré :");
+			return this.artefactsPocket[itemsInArtefactsPocket-1];
+		}
+	}
+	
+	public void dropArtefact(int i)
+	{
+		int I = i-1;
+		if (i <= itemsInArtefactsPocket || artefactsPocket[I] != null) {
+			for (int j = 0; j < itemsInArtefactsPocket-i; ++j) {
+				artefactsPocket[I+j] = artefactsPocket[I+j+1];
+			}
+			artefactsPocket[itemsInArtefactsPocket-1] = null;
+			--itemsInArtefactsPocket;
 		}
 		else 
 			System.err.println("Vous n'avez pas d'objet à cet emplacement !");
