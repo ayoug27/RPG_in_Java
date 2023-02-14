@@ -16,7 +16,25 @@ public class main {
 		System.out.println("Absent");
 */
 		entities.Hero Hero = new Hero(0,0);
-		Hero.getInventory().potionsPocket[0] = new Potion(0, "Potion de Vie","Common",5);
-		System.out.println(Hero.getInventory().potionsPocket[0].toString());
+		Hero.getInventory().addWeaponInPocket(new Weapon(0, "Epée en Bois","Common",1));
+		Hero.getInventory().addWeaponInPocket(new Weapon(0, "Epée en Pierre","Uncommon",5));
+		Hero.getInventory().addPotionInPocket(new Potion(0, "A","Common",5));
+		Hero.getInventory().addPotionInPocket(new Potion(0, "B","Common",5));
+		Hero.getInventory().addPotionInPocket(new Potion(0, "C","Common",5));
+		Hero.getInventory().addPotionInPocket(new Potion(0, "D","Common",5));
+		Hero.getInventory().addPotionInPocket(new Potion(0, "E","Common",5));
+		System.out.println(Hero.getInventory().accessPotionInPocket(1).toString());
+		System.out.println(Hero.getInventory().accessPotionInPocket(2).toString());
+		System.out.println(Hero.getInventory().accessPotionInPocket(3).toString());
+		System.out.println(Hero.getInventory().accessPotionInPocket(4).toString());
+		System.out.println(Hero.getInventory().accessPotionInPocket(5).toString());
+		System.out.println(Hero.getInventory().getItemsInPotionsPocket());
+		Hero.getInventory().dropPotionInPocket(2);
+		System.out.println();
+		System.out.println(Hero.getInventory().accessPotionInPocket(1).toString());
+		System.out.println(Hero.getInventory().accessPotionInPocket(2).toString());
+		System.out.println(Hero.getInventory().accessPotionInPocket(3).toString());
+		System.out.println(Hero.getInventory().accessPotionInPocket(4).toString());
+		System.out.println(Hero.getInventory().getItemsInPotionsPocket());
 	}
 }
