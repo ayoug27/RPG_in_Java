@@ -1,5 +1,4 @@
 package entities;
-import items.*;
 
 public class Inventory {
 	private items.Armor spareArmor;
@@ -17,7 +16,7 @@ public class Inventory {
 		this.artefactsPocket = new items.Artefact[3];
 		itemsInArtefactsPocket = 0;
 		this.potionsPocket = new items.Potion[5];
-  itemsInPotionsPocket = 0;
+		itemsInPotionsPocket = 0;
 	}
 
 	public items.Armor getSpareArmor() {

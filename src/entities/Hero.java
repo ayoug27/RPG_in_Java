@@ -1,5 +1,4 @@
 package entities;
-import items.*;
 
 public class Hero extends Entity {
 	private int Level;

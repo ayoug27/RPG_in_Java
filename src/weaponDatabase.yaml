@@ -1,0 +1,40 @@
+- id: 0
+  name: "Baton en Bois"
+  rarity: "Common"
+  attack: 1
+- id: 1
+  name: "Lance-Pierre"
+  rarity: "Common"
+  attack: 1  
+- id: 2
+  name: "Epee en Bois"
+  rarity: "Common"
+  attack: 2  
+- id: 3
+  name: "Arc de Survie"
+  rarity: "Common"
+  attack: 2  
+- id: 4
+  name: "Hache en Bois"
+  rarity: "Common"
+  attack: 3
+- id: 5
+  name: "Arc Leger"
+  rarity: "Common"
+  attack: 3
+- id: 6
+  name: "Epee en Pierre"
+  rarity: "Common"
+  attack: 4
+- id: 7
+  name: "Arc Leger Renforce"
+  rarity: "Common"
+  attack: 4
+- id: 8
+  name: "Hache en Pierre"
+  rarity: "Common"
+  attack: 5
+- id: 9
+  name: "Arc Long"
+  rarity: "Common"
+  attack: 5
