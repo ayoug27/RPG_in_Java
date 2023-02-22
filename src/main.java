@@ -3,6 +3,7 @@ import java.io.*;
 import items.*;
 import entities.*;
 
+
 public class main {
 	
 	public static void main(String[] args) throws Exception{
@@ -18,22 +19,8 @@ public class main {
 		Hero.getInventory().dropArtefact(1);
 		System.out.println(Hero.getInventory().getItemsInArtefactsPocket());
 */
-	    FileReader reader = new FileReader("weaponDatabase.properties");  
-	      
-	    Properties p=new Properties();  
-	    p.load(reader);  
-	      
-/*	    System.out.println(p.getProperty("id0"));  
-	    System.out.println(p.getProperty("name0"));  
-	    System.out.println(p.getProperty("rarity0"));  
-	    System.out.println(p.getProperty("attack0"));  
-	    System.out.println(p.size()/4);*/
-		items.Weapon[] weaponDatabase = new items.Weapon[p.size()/4];
-		int id = Integer.parseInt(p.getProperty("id"+0));
-		for (int i = 0; i < weaponDatabase.length; ++i)
-		{
-			weaponDatabase[i] = new Weapon (Integer.parseInt(p.getProperty("id"+i)),p.getProperty("name"+i),p.getProperty("rarity"+i),Integer.parseInt(p.getProperty("attack"+i)));
-		}
-
+		items.Weapon[] weaponDatabase = Database.setWeaponDatabase("res/weaponDatabase.properties");
+		items.Potion[] potionDatabase = Database.setPotionDatabase("res/potionDatabase.properties");
+		System.out.println(potionDatabase[0].getName());
 	}
 }

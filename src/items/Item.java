@@ -8,7 +8,7 @@ public class Item {
 	private boolean checkRarity (String rarity){
 		final String[] LIST_RAR = {"Common","Uncommon","Rare","Epic","Legendary","Mythic"};
 		for (String element : LIST_RAR) {
-		    if (element == rarity) {
+		    if (element.equals(rarity)) {
 		        return true;
 		    }
 		}
