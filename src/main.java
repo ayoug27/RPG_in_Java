@@ -19,8 +19,11 @@ public class main {
 		Hero.getInventory().dropArtefact(1);
 		System.out.println(Hero.getInventory().getItemsInArtefactsPocket());
 */
-		items.Weapon[] weaponDatabase = Database.setWeaponDatabase("res/weaponDatabase.properties");
-		items.Potion[] potionDatabase = Database.setPotionDatabase("res/potionDatabase.properties");
-		System.out.println(potionDatabase[0].getName());
+		items.Weapon[][] weaponDatabase = Database.setWeaponDatabase("res/weaponDatabase.properties");
+		items.Potion[][] potionDatabase = Database.setPotionDatabase("res/potionDatabase.properties");
+		items.Armor[][] armorDatabase = Database.setArmorDatabase("res/armorDatabase.properties");
+		System.out.println(weaponDatabase[1][0].getName());
+		System.out.println(potionDatabase[5][0].getName());
+		System.out.println(armorDatabase[0][0].getName());
 	}
 }

@@ -3,8 +3,8 @@ package items;
 public class Weapon extends Item{
 	private int Attack;
 
-	public Weapon(int id, String name, String rarity, int attack) {
-		super(id, name, rarity);
+	public Weapon(String name, String rarity, int attack) {
+		super(name, rarity);
 		Attack = attack;
 	}
 

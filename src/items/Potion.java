@@ -4,8 +4,8 @@ public class Potion extends Item{
 	private int healthValue;
 
 	
-	public Potion(int id, String name, String rarity, int healthValue) {
-		super(id, name, rarity);
+	public Potion(String name, String rarity, int healthValue) {
+		super(name, rarity);
 		this.healthValue = healthValue;
 	}
 

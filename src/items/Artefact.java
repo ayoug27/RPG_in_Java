@@ -4,8 +4,8 @@ public class Artefact extends Item{
 	private String buffedAbility;
 	private int buffValue;
 	
-	public Artefact(int id, String name, String rarity, String buffedAbility, int buffValue) {
-		super(id, name, rarity);
+	public Artefact(String name, String rarity, String buffedAbility, int buffValue) {
+		super(name, rarity);
 		this.buffedAbility = buffedAbility;
 		this.buffValue = buffValue;
 	}

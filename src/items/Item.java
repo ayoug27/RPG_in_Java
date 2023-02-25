@@ -1,7 +1,6 @@
 package items;
 
 public class Item {
-	private int ID;
 	private String Name;
 	private String Rarity;
 
@@ -15,22 +14,13 @@ public class Item {
 		return false;
 	}
 	
-	public Item(int id, String name, String rarity) {
+	public Item(String name, String rarity) {
 		if (checkRarity(rarity)){
-			ID = id;
 			Name = name;
 			Rarity = rarity;
 		}
 		else
 			System.err.println("This rarity doesn't exist.");
-	}
-
-	public int getID() {
-		return ID;
-	}
-	
-	public void setID(int iD) {
-		ID = iD;
 	}
 
 	public String getName() {
