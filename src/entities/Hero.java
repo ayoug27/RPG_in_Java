@@ -1,6 +1,8 @@
 package entities;
 
 public class Hero extends Entity {
+	private int X;
+	private int Y;
 	private int Level;
 	private int XP;
 	private int Attack;
@@ -12,7 +14,9 @@ public class Hero extends Entity {
 	private entities.Inventory Inventory;
 	
 	public Hero(int x, int y) {
-		super(x, y, 10, 1, 1, 1);
+		super(10, 1, 1, 1);
+		X = x;
+		Y = y;
 		Level = 1;
 		XP = 0;
 		this.equippedWeapon = null;
@@ -145,6 +149,15 @@ public class Hero extends Entity {
 		else {
 			System.err.println("Vous n'avez pas d'objet a cet endroit !");
 			return;
+		}
+	}
+	
+	public void levelUp()
+	{
+		if (this.XP >= this.Level*10)
+		{
+			this.XP -= this.Level*10;
+			this.Level += 1;
 		}
 	}
 }
