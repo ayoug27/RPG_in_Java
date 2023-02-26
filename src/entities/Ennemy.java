@@ -4,16 +4,18 @@ public class Ennemy extends Entity {
 	private String Rarity;
 	private int MinXPGiven;
 	private int MaxXPGiven;
+	private boolean isBoss;
 	
-	public Ennemy(int hP, int baseAttack, int baseDefense, int baseSpeed, String description,
-			String rarity, int minXPGiven, int maxXPGiven) {
+	public Ennemy(int hP, int baseAttack, int baseDefense, int baseSpeed, String description, String rarity,
+			int minXPGiven, int maxXPGiven, boolean isBoss) {
 		super(hP, baseAttack, baseDefense, baseSpeed);
 		Description = description;
 		Rarity = rarity;
 		MinXPGiven = minXPGiven;
 		MaxXPGiven = maxXPGiven;
+		this.isBoss = isBoss;
 	}
-	
+
 	public String getDescription() {
 		return Description;
 	}
@@ -38,6 +40,10 @@ public class Ennemy extends Entity {
 	public void setMaxXPGiven(int maxXPGiven) {
 		MaxXPGiven = maxXPGiven;
 	}
-	
-	
+	public boolean isBoss() {
+		return isBoss;
+	}
+	public void setBoss(boolean isBoss) {
+		this.isBoss = isBoss;
+	}	
 }
