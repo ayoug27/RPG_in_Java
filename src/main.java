@@ -26,6 +26,6 @@ public class main {
 		entities.Hero Hero = new Hero(0,0);
 		entities.Ennemy rat = new Ennemy(5, 1, 1, 1, "Rat d'egout", "Un rat d'egout trop cracra","Common", 1, 3, false);
 		Fight fight = new Fight(Hero,rat,false);
-		fight.firstAttacking();
+		fight.fightTurn();
 	}
 }

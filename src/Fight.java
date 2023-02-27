@@ -13,9 +13,15 @@ public class Fight {
 		this.isFinished = isFinished;
 	}
 	
-	public void victory()
-	{
-		System.out.printf("Vous avez battu %s ! Le combat est terminé.\n",Ennemy.getName());
+	public void victory() {
+		System.out.printf("Vous avez battu %s ! Le combat est termine.\n",Ennemy.getName());
+		this.isFinished = true;
+	}
+	
+	public void defeat() {
+		System.out.printf("Vous n'avez plus de PV, %s vous a tué.\n", Ennemy.getName());
+		this.isFinished = true;
+		Misc.gameOver();
 	}
 	
 	public void heroAttack() {
@@ -45,15 +51,26 @@ public class Fight {
 		int speedHero = Misc.diceRoll(Hero.getSpeed(),1);
 		int speedEnnemy = Misc.diceRoll(Ennemy.getBaseSpeed(),1);
 		if (speedHero >= speedEnnemy) {
-			System.out.println("Vous êtes plus rapide et attaquez en premier !");
+			System.out.println("Vous etes plus rapide et attaquez en premier !");
 			Misc.wait(1000);
 			heroAttack();
+			fightTurn();
 		}
 		else {
 			System.out.printf("%s est plus rapide et vous attaque en premier !\n",Ennemy.getName());
-			try {Thread.sleep(1000);} 
-			catch (InterruptedException e) {Thread.currentThread().interrupt();}			
+			Misc.wait(1000);			
 			ennemyAttack();
+			fightTurn();
 		}
+	}
+	
+	public void fightTurn() {
+		if (Ennemy.getHP() <= 0) {
+			victory();
+			return;
+		}
+		if (Hero.getHP() <= 0)
+			defeat();
+		firstAttacking();
 	}
 }
