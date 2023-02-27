@@ -1,21 +1,30 @@
 package entities;
 public class Ennemy extends Entity {
+	private String name;
 	private String Description;
 	private String Rarity;
 	private int MinXPGiven;
 	private int MaxXPGiven;
 	private boolean isBoss;
-	
-	public Ennemy(int hP, int baseAttack, int baseDefense, int baseSpeed, String description, String rarity,
-			int minXPGiven, int maxXPGiven, boolean isBoss) {
+
+	public Ennemy(int hP, int baseAttack, int baseDefense, int baseSpeed, String name, String description,
+			String rarity, int minXPGiven, int maxXPGiven, boolean isBoss) {
 		super(hP, baseAttack, baseDefense, baseSpeed);
+		this.name = name;
 		Description = description;
 		Rarity = rarity;
 		MinXPGiven = minXPGiven;
 		MaxXPGiven = maxXPGiven;
 		this.isBoss = isBoss;
 	}
+		
+	public String getName() {
+		return name;
+	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
 	public String getDescription() {
 		return Description;
 	}

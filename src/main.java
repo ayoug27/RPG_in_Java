@@ -1,14 +1,15 @@
 import java.util.*;  
 import java.io.*;  
+import java.lang.*;
 import items.*;
 import entities.*;
 
 
 public class main {
 	
-	public static void main(String[] args) throws Exception{
+	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-		items.Weapon[][] weaponDatabase = Database.setWeaponDatabase("res/weaponDatabase.properties");
+/*		items.Weapon[][] weaponDatabase = Database.setWeaponDatabase("res/weaponDatabase.properties");
 		items.Potion[][] potionDatabase = Database.setPotionDatabase("res/potionDatabase.properties");
 		items.Armor[][] armorDatabase = Database.setArmorDatabase("res/armorDatabase.properties");
 		entities.Hero Hero = new Hero(0,0);
@@ -21,6 +22,10 @@ public class main {
 		Hero.setEquippedArtefact(new Artefact("Talisman d'Attaque","Common","Attack",5));
 		Hero.setAttack();
 		System.out.println(Hero.getAttack());
-		System.out.println(Hero.getInventory().getItemsInWeaponsPocket());
+		System.out.println(Hero.getInventory().getItemsInWeaponsPocket());*/
+		entities.Hero Hero = new Hero(0,0);
+		entities.Ennemy rat = new Ennemy(5, 1, 1, 1, "Rat d'egout", "Un rat d'egout trop cracra","Common", 1, 3, false);
+		Fight fight = new Fight(Hero,rat,false);
+		fight.firstAttacking();
 	}
 }
