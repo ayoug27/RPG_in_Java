@@ -5,21 +5,32 @@ import java.io.*;
 
 public class Database {
 	public final entities.Ennemy[][] ENNEMY_DATABASE;
-	public final items.Armor[][] ARMOR_DATABASE;
+	public final static items.Armor[][] ARMOR_DATABASE = setArmorDatabase("res/armorDatabase.properties");
 	public final items.Artefact[][] ARTEFACT_DATABASE;
-	public final items.Potion[][] POTION_DATABASE;
-	public final items.Weapon[][] WEAPON_DATABASE;
+	public final static items.Potion[][] POTION_DATABASE = setPotionDatabase("res/potionDatabase.properties");
+	public final static items.Weapon[][] WEAPON_DATABASE = setWeaponDatabase("res/weaponDatabase.properties");
 
 	private entities.Ennemy[] setEnnemyDatabase (String filename)
 	{
 		
 	}
 	
-	public static items.Armor[][] setArmorDatabase (String filename) throws Exception
+	public static items.Armor[][] setArmorDatabase (String filename)
 	{
-	    FileReader reader = new FileReader(filename);        
+	    FileReader reader = null;
+		try {
+			reader = new FileReader(filename);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}        
 	    Properties p=new Properties();  
-	    p.load(reader);  
+	    try {
+			p.load(reader);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
 		items.Armor[][] armorDatabase = new items.Armor[6][];
 		armorDatabase[0] = new items.Armor[Integer.parseInt(p.getProperty("commonItems"))]; 
 		armorDatabase[1] = new items.Armor[Integer.parseInt(p.getProperty("uncommonItems"))]; 
@@ -40,11 +51,22 @@ public class Database {
 		return armorDatabase;
 	}
 	
-	public static items.Potion[][] setPotionDatabase (String filename) throws Exception
+	public static items.Potion[][] setPotionDatabase (String filename)
 	{
-	    FileReader reader = new FileReader(filename);        
+	    FileReader reader = null;
+		try {
+			reader = new FileReader(filename);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}        
 	    Properties p=new Properties();  
-	    p.load(reader);  
+	    try {
+			p.load(reader);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
 		items.Potion[][] potionDatabase = new items.Potion[6][];
 		potionDatabase[0] = new items.Potion[Integer.parseInt(p.getProperty("commonItems"))]; 
 		potionDatabase[1] = new items.Potion[Integer.parseInt(p.getProperty("uncommonItems"))]; 
@@ -65,11 +87,22 @@ public class Database {
 		return potionDatabase;
 	}
 	
-	public static items.Weapon[][] setWeaponDatabase (String filename) throws Exception
+	public static items.Weapon[][] setWeaponDatabase (String filename)
 	{
-	    FileReader reader = new FileReader(filename);        
+	    FileReader reader = null;
+		try {
+			reader = new FileReader(filename);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}        
 	    Properties p=new Properties();  
-	    p.load(reader);  
+	    try {
+			p.load(reader);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
 		items.Weapon[][] weaponDatabase = new items.Weapon[6][];
 		weaponDatabase[0] = new items.Weapon[Integer.parseInt(p.getProperty("commonItems"))]; 
 		weaponDatabase[1] = new items.Weapon[Integer.parseInt(p.getProperty("uncommonItems"))]; 
@@ -88,13 +121,5 @@ public class Database {
 			}
 		}
 		return weaponDatabase;
-	}
-
-	public Database(String ennemyFileName, String armorFileName, String artefactFileName, String potionFileName, String weaponFileName) {
-		ENNEMY_DATABASE = setEnnemyDatabase(ennemyFileName);
-		ARMOR_DATABASE = setArmorDatabase(armorFileName);
-		ARTEFACT_DATABASE = setArtefactDatabase(artefactFileName);
-		POTION_DATABASE = setPotionDatabase(potionFileName);
-		WEAPON_DATABASE = setWeaponDatabase(weaponFileName);
 	}
 }
