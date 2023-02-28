@@ -18,7 +18,11 @@ public class Fight {
 		
 	public void victory() {
 		System.out.printf("Vous avez battu %s ! Le combat est terminé.\n",Ennemy.getName());
-		Misc.wait(1000);;
+		Misc.wait(1000);
+		if (this.Ennemy.isBoss()) {
+			System.out.println("Vous avez gagné le jeu !");
+			System.exit(0);
+		}
 		int xpWon = Misc.diceRoll(Ennemy.getMaxXPGiven(), Ennemy.getMinXPGiven());
 		Hero.setXP(Hero.getXP()+xpWon);
 		System.out.printf("Vous gagnez %d XP !\n",xpWon);

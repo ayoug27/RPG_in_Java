@@ -54,9 +54,9 @@ public class Tile {
     
     entities.Ennemy generateEnnemy(){
     	int iRarity = getIndexOfRarity();
-    	 return Database.ENNEMY_DATABASE[iRarity][Misc.diceRoll(Database.ENNEMY_DATABASE[iRarity].length-1, 0)];
+    	return Database.ENNEMY_DATABASE[iRarity][Misc.diceRoll(Database.ENNEMY_DATABASE[iRarity].length-1, 0)];
     }
-    
+
     public Tile(boolean isAccessible, boolean hasEnnemy, boolean hasChest, String rarity) {
 		super();
 		this.isAccessible = isAccessible;
@@ -74,7 +74,18 @@ public class Tile {
 		this.fight = null;
 	}
     
-    public void showTile(scanner Scanner) {
-    	
+    public void removeFromChest(int i){
+    	int I = i-1;
+		items.Item[] newChest = new items.Item[this.Chest.length-1];
+		int j = 0;
+		int k = 0;
+		while (j < newChest.length) {
+			if (k == I)
+				++k;
+			newChest[j]=this.Chest[k];
+			++j;
+			++k;
+		}			
+		this.Chest = newChest;
     }
 }

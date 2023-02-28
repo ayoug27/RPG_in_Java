@@ -116,6 +116,7 @@ public class Hero extends Entity {
 
 	public void setEquippedWeapon(items.Weapon equippedWeapon) {
 		this.equippedWeapon = equippedWeapon;
+		this.setAttack();
 	}
 
 	public items.Armor getEquippedArmor() {
@@ -124,6 +125,7 @@ public class Hero extends Entity {
 
 	public void setEquippedArmor(items.Armor equippedArmor) {
 		this.equippedArmor = equippedArmor;
+		this.setDefense();
 	}
 
 	public items.Artefact getEquippedArtefact() {
@@ -132,6 +134,9 @@ public class Hero extends Entity {
 
 	public void setEquippedArtefact(items.Artefact equippedArtefact) {
 		this.equippedArtefact = equippedArtefact;
+		this.setAttack();
+		this.setDefense();
+		this.setSpeed();
 	}
 
 	public entities.Inventory getInventory() {
@@ -403,8 +408,7 @@ public class Hero extends Entity {
 				Misc.wait(1000);
 				return;
 			}
-			for (int numberOfItems = 1; numberOfItems <= this.getInventory()
-					.getItemsInPotionsPocket(); ++numberOfItems) {
+			for (int numberOfItems = 1; numberOfItems <= this.getInventory().getItemsInPotionsPocket(); ++numberOfItems) {
 				System.out.printf("%d : %s\n", numberOfItems,this.getInventory().accessPotionInPocket(numberOfItems).getName());
 				System.out.println("Choisissez l'objet (numéro) avec lequel vous souhaitez interagir.");
 				int promptInt = Integer.parseInt(scanner.nextLine());

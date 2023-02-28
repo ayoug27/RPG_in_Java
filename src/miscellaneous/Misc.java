@@ -21,4 +21,12 @@ public class Misc {
 			e.printStackTrace();
 		} 
 	}
+	
+	public static boolean booleanDiceRoll(int value)
+	{
+		if ((int)(Math.random()*3 +1) == value)
+			return true;
+		else
+			return false;
+	}
 }

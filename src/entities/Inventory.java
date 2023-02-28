@@ -3,11 +3,11 @@ import java.util.Scanner;
 
 public class Inventory {
 	private items.Armor spareArmor;
-	private items.Weapon[] weaponsPocket;
+	public items.Weapon[] weaponsPocket;
 	private int itemsInWeaponsPocket;
-	private items.Artefact[] artefactsPocket;
+	public items.Artefact[] artefactsPocket;
 	private int itemsInArtefactsPocket;
-	private items.Potion[] potionsPocket;
+	public items.Potion[] potionsPocket;
 	private int itemsInPotionsPocket;
 
 	public Inventory() {
