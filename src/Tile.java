@@ -6,7 +6,7 @@ public class Tile {
     boolean hasEnnemy; 
     boolean hasChest;
     String Rarity;
-    entities.Ennemy ennemyContained;
+    entities.Ennemy ennemy;
     Fight fight;
     items.Item[] Chest;
 	
@@ -49,18 +49,26 @@ public class Tile {
     	return chest;
     }
     
-    public Tile(boolean isAccessible, boolean hasEnnemy, boolean hasChest, String rarity, Ennemy ennemyContained) {
+    entities.Ennemy generateEnnemy(){
+    	int iRarity = getIndexOfRarity();
+    	 return Database.ENNEMY_DATABASE[iRarity][Misc.diceRoll(Database.ENNEMY_DATABASE[iRarity].length-1, 0)];
+    }
+    
+    public Tile(boolean isAccessible, boolean hasEnnemy, boolean hasChest, String rarity) {
 		super();
 		this.isAccessible = isAccessible;
 		this.hasEnnemy = hasEnnemy;
 		this.hasChest = hasChest;
 		Rarity = rarity;
-		this.ennemyContained = ennemyContained;
-		this.fight = null;
 		if (this.hasChest)
 			Chest = generateChest();
 		else
 			Chest = null;
+		if (this.hasEnnemy)
+			this.ennemy = generateEnnemy();
+		else
+			this.ennemy = null;
+		this.fight = null;
 	}
 
     

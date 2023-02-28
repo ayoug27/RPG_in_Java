@@ -35,6 +35,5 @@ public class Entity {
 	}
 	public void setBaseSpeed(int baseSpeed) {
 		this.baseSpeed = baseSpeed;
-	}
-}	
-
+	}	
+}

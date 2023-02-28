@@ -54,5 +54,11 @@ public class Ennemy extends Entity {
 	}
 	public void setBoss(boolean isBoss) {
 		this.isBoss = isBoss;
+	}
+
+	@Override
+	public String toString() {
+		return "Ennemy [name=" + name + ", Description=" + Description + ", Rarity=" + Rarity + ", MinXPGiven="
+				+ MinXPGiven + ", MaxXPGiven=" + MaxXPGiven + ", isBoss=" + isBoss + "]";
 	}	
 }

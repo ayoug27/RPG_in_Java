@@ -24,7 +24,8 @@ public class main {
 		entities.Ennemy rat = new Ennemy(5, 1, 1, 1, "Rat d'egout", "Un rat d'egout trop cracra","Common", 1, 3, false);
 		Fight fight = new Fight(Hero,rat,false);
 		fight.fightTurn();*/
-		Tile dalle = new Tile(true, false, true, "Common", null);
-		System.out.println(dalle.Chest[0]);
+		Tile dalle = new Tile(true, true, true, "Common");
+		System.out.println(Database.ENNEMY_DATABASE[0][0])
+		;
 	}
 }
