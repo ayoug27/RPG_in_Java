@@ -196,9 +196,40 @@ public class Hero extends Entity {
 		if (this.XP >= this.Level * 10) {
 			this.XP -= this.Level * 10;
 			this.Level += 1;
+			skillLevelUp(this.getLevel());
 		}
 	}
 
+	public void skillLevelUp(int level)
+	{
+		while (true) {
+			System.out.println("Vous êtes monté de niveau ! Choisissez maintenant la compétence que vous allez améliorer.");
+			System.out.println("hp; attack; defense; speed");
+			Scanner scanner = new Scanner(System.in);
+			String prompt = scanner.nextLine();
+			switch (prompt) {
+			case "hp" :
+				this.setMaxHP(this.getMaxHP()+5*(int)(level/2)); 
+				System.out.println("Vous vous sentez plus résistant ! Votre vie maximale est à "+this.getMaxHP());
+				return;
+			case "attack":
+				this.setBaseAttack(this.getAttack()+(int)(level/2)); 
+				System.out.println("Vous vous sentez plus fort ! Votre attaque est à "+this.getBaseAttack());
+				return;
+			case "defense":
+				this.setBaseDefense(this.getDefense()+(int)(level/2)); 
+				System.out.println("Vous vous sentez plus résistant ! Votre défense est à "+this.getBaseDefense());
+				return;       	
+			case "speed":
+				this.setBaseAttack(this.getAttack()+(int)(level/2)); 
+				System.out.println("Vous vous sentez plus vif et rapide ! Votre vitesse est à "+this.getBaseSpeed());
+				return;
+			default:
+				System.out.println("Commande inexistante. Veuillez réessayer."); continue;
+			}
+		}
+	}
+	
 	public void usePotion(items.Potion potion) {
 		this.setHP(this.getHP()+potion.getHealthValue());
 		if (this.getHP() > this.getMaxHP())

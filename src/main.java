@@ -35,8 +35,9 @@ public class main {
 		Hero.getInventory().addArtefactInPocket(Database.ARTEFACT_DATABASE[0][0]);
 		Hero.getInventory().addWeaponInPocket(Database.WEAPON_DATABASE[0][5]);
 		Hero.getInventory().addPotionInPocket(Database.POTION_DATABASE[0][0]);
-		System.out.println(Hero.getInventory().getItemsInArtefactsPocket());
-		Hero.showInventory(scanner);
+		Hero.setXP(12);
+//		Hero.showInventory(scanner);
+		Hero.levelUp();
 	}
 }
 
