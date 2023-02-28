@@ -23,9 +23,6 @@ public class main {
 		System.out.println(Hero.getAttack());
 		System.out.println(Hero.getInventory().getItemsInWeaponsPocket());
 		entities.Hero Hero = new Hero(0,0);
-		entities.Ennemy rat = new Ennemy(5, 1, 1, 1, "Rat d'egout", "Un rat d'egout trop cracra","Common", 1, 3, false);
-		Fight fight = new Fight(Hero,rat,false);
-		fight.fightTurn();
 		Tile dalle = new Tile(true, true, true, "Common");
 		System.out.println(dalle.Chest[0]);*/
 		Scanner scanner = new Scanner(System.in);
@@ -35,9 +32,9 @@ public class main {
 		Hero.getInventory().addArtefactInPocket(Database.ARTEFACT_DATABASE[0][0]);
 		Hero.getInventory().addWeaponInPocket(Database.WEAPON_DATABASE[0][5]);
 		Hero.getInventory().addPotionInPocket(Database.POTION_DATABASE[0][0]);
-		Hero.setXP(12);
 //		Hero.showInventory(scanner);
-		Hero.levelUp();
+		Fight fight = new Fight(Hero,Database.ENNEMY_DATABASE[0][0],false);
+		fight.showFight(scanner);
 	}
 }
 

@@ -198,6 +198,8 @@ public class Hero extends Entity {
 			this.Level += 1;
 			skillLevelUp(this.getLevel());
 		}
+		else
+			System.out.printf("Il vous reste %d XP avant de monter de niveau.\n",this.Level*10-this.XP);
 	}
 
 	public void skillLevelUp(int level)

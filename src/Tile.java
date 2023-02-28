@@ -1,3 +1,6 @@
+import java.util.*;  
+import java.io.*;  
+import java.lang.*;
 import entities.Ennemy;
 import items.Item;
 import miscellaneous.Misc;
@@ -70,6 +73,8 @@ public class Tile {
 			this.ennemy = null;
 		this.fight = null;
 	}
-
     
+    public void showTile(scanner Scanner) {
+    	
+    }
 }
