@@ -57,7 +57,10 @@ public class Tile {
 		Rarity = rarity;
 		this.ennemyContained = ennemyContained;
 		this.fight = null;
-		Chest = generateChest();
+		if (this.hasChest)
+			Chest = generateChest();
+		else
+			Chest = null;
 	}
 
     
