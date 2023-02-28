@@ -10,8 +10,7 @@ public class Tile {
     Fight fight;
     items.Item[] Chest;
 	
-    items.Item[] generateChest(){
-    	items.Item[] chest = new items.Item[Misc.diceRoll(5, 1)];
+    private int getIndexOfRarity() {
     	int iRarity = 0;
     	switch (this.Rarity) {
     		case "Common":
@@ -26,7 +25,13 @@ public class Tile {
     			iRarity = 4; break;
     		case "Mythic":
     			iRarity = 5; break;
-    	}
+    	}	
+    	return iRarity;
+    }
+    
+    items.Item[] generateChest(){
+    	items.Item[] chest = new items.Item[Misc.diceRoll(5, 1)];
+    	int iRarity = getIndexOfRarity();
     	for (int i = 0; i < chest.length; ++i) {
     		int iItemType = Misc.diceRoll(4,1);
     		switch (iItemType) {
