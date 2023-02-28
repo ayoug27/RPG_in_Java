@@ -1,4 +1,5 @@
 package entities;
+import java.util.Scanner;
 
 public class Inventory {
 	private items.Armor spareArmor;

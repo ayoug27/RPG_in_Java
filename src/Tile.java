@@ -1,5 +1,6 @@
 import entities.Ennemy;
 import items.Item;
+import miscellaneous.Misc;
 
 public class Tile {
     boolean isAccessible;
@@ -38,8 +39,7 @@ public class Tile {
     			case 1:
     				chest[i] = Database.ARMOR_DATABASE[iRarity][Misc.diceRoll(Database.ARMOR_DATABASE[iRarity].length-1,0)]; break;
     			case 2:
-    				chest[i] = Database.ARMOR_DATABASE[iRarity][Misc.diceRoll(Database.ARMOR_DATABASE[iRarity].length-1,0)]; break;
-//					chest[i] = Database.ARTEFACT_DATABASE[iRarity][Misc.diceRoll(Database.ARTEFACT_DATABASE[iRarity].length-1,0)];
+					chest[i] = Database.ARTEFACT_DATABASE[iRarity][Misc.diceRoll(Database.ARTEFACT_DATABASE[iRarity].length-1,0)]; break;
     			case 3:
 					chest[i] = Database.POTION_DATABASE[iRarity][Misc.diceRoll(Database.POTION_DATABASE[iRarity].length-1,0)]; break;
     			case 4:

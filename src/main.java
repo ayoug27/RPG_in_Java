@@ -3,14 +3,16 @@ import java.io.*;
 import java.lang.*;
 import items.*;
 import entities.*;
+import miscellaneous.*;
+
 
 
 public class main {
 	
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-/*		entities.Hero Hero = new Hero(0,0);
-		Hero.getInventory().addWeaponInPocket(weaponDatabase[0][9]);
+		entities.Hero Hero = new Hero(0,0);
+/*		Hero.getInventory().addWeaponInPocket(weaponDatabase[0][9]);
 		Hero.getInventory().addPotionInPocket(potionDatabase[0][0]);
 		Hero.getInventory().addArtefactInPocket(new Artefact("Talisman d'Attaque","Common","Attaque",5));
 		System.out.println(Hero.getInventory().accessWeaponInPocket(1));
@@ -23,9 +25,18 @@ public class main {
 		entities.Hero Hero = new Hero(0,0);
 		entities.Ennemy rat = new Ennemy(5, 1, 1, 1, "Rat d'egout", "Un rat d'egout trop cracra","Common", 1, 3, false);
 		Fight fight = new Fight(Hero,rat,false);
-		fight.fightTurn();*/
+		fight.fightTurn();
 		Tile dalle = new Tile(true, true, true, "Common");
-		System.out.println(Database.ENNEMY_DATABASE[0][0])
-		;
+		System.out.println(dalle.Chest[0]);*/
+		Scanner scanner = new Scanner(System.in);
+		Hero.setEquippedArtefact(Database.ARTEFACT_DATABASE[0][0]);
+		Hero.setEquippedWeapon(Database.WEAPON_DATABASE[0][0]);
+		Hero.getInventory().setSpareArmor(Database.ARMOR_DATABASE[0][0]);
+		Hero.getInventory().addArtefactInPocket(Database.ARTEFACT_DATABASE[0][0]);
+		Hero.getInventory().addWeaponInPocket(Database.WEAPON_DATABASE[0][5]);
+		Hero.getInventory().addPotionInPocket(Database.POTION_DATABASE[0][0]);
+		System.out.println(Hero.getInventory().getItemsInArtefactsPocket());
+		Hero.showInventory(scanner);
 	}
 }
+

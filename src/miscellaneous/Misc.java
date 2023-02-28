@@ -1,3 +1,4 @@
+package miscellaneous;
 
 public class Misc {
 	public static int diceRoll(int max, int min)

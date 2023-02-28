@@ -1,6 +1,10 @@
 package entities;
 
+import miscellaneous.*;
+import java.util.Scanner;
+
 public class Hero extends Entity {
+	private int maxHP;
 	private int X;
 	private int Y;
 	private int Level;
@@ -12,9 +16,10 @@ public class Hero extends Entity {
 	private items.Armor equippedArmor;
 	private items.Artefact equippedArtefact;
 	private entities.Inventory Inventory;
-	
+
 	public Hero(int x, int y) {
 		super(10, 1, 1, 1);
+		maxHP = this.getHP();
 		X = x;
 		Y = y;
 		Level = 1;
@@ -28,136 +33,382 @@ public class Hero extends Entity {
 		Inventory = new Inventory();
 	}
 	
+	public int getMaxHP() {
+		return maxHP;
+	}
+
+	public void setMaxHP(int maxHP) {
+		this.maxHP = maxHP;
+	}
+
+	public int getX() {
+		return X;
+	}
+
+	public void setX(int x) {
+		X = x;
+	}
+
+	public int getY() {
+		return Y;
+	}
+
+	public void setY(int y) {
+		Y = y;
+	}
+
 	public int getLevel() {
 		return Level;
 	}
+
 	public void setLevel(int level) {
 		Level = level;
 	}
+
 	public int getXP() {
 		return XP;
 	}
+
 	public void setXP(int xP) {
 		XP = xP;
 	}
+
 	public int getAttack() {
 		return Attack;
 	}
+
 	public void setAttack() {
 		int itemAttack = 0;
 		if (this.equippedWeapon != null)
 			itemAttack += this.equippedWeapon.getAttack();
 		if (this.equippedArtefact != null && this.equippedArtefact.getBuffedAbility() == "Attack")
 			itemAttack += this.equippedArtefact.getBuffValue();
-		Attack = this.getBaseAttack()+itemAttack;	
+		Attack = this.getBaseAttack() + itemAttack;
 	}
+
 	public int getDefense() {
 		return Defense;
 	}
+
 	public void setDefense() {
 		int itemDefense = 0;
 		if (this.equippedArmor != null)
 			itemDefense += this.equippedArmor.getDefense();
 		if (this.equippedArtefact != null && this.equippedArtefact.getBuffedAbility() == "Defense")
 			itemDefense += this.equippedArtefact.getBuffValue();
-		Defense = this.getBaseDefense()+itemDefense;	
+		Defense = this.getBaseDefense() + itemDefense;
 	}
+
 	public int getSpeed() {
 		return Speed;
 	}
+
 	public void setSpeed() {
 		int itemSpeed = 0;
 		if (this.equippedArtefact != null && this.equippedArtefact.getBuffedAbility() == "Speed")
 			itemSpeed += this.equippedArtefact.getBuffValue();
-		Speed = this.getBaseSpeed()+itemSpeed;	
+		Speed = this.getBaseSpeed() + itemSpeed;
 	}
+
 	public items.Weapon getEquippedWeapon() {
 		return equippedWeapon;
 	}
+
 	public void setEquippedWeapon(items.Weapon equippedWeapon) {
 		this.equippedWeapon = equippedWeapon;
 	}
+
 	public items.Armor getEquippedArmor() {
 		return equippedArmor;
 	}
+
 	public void setEquippedArmor(items.Armor equippedArmor) {
 		this.equippedArmor = equippedArmor;
 	}
+
 	public items.Artefact getEquippedArtefact() {
 		return equippedArtefact;
 	}
+
 	public void setEquippedArtefact(items.Artefact equippedArtefact) {
 		this.equippedArtefact = equippedArtefact;
 	}
+
 	public entities.Inventory getInventory() {
 		return Inventory;
 	}
+
 	public void setInventory(entities.Inventory inventory) {
 		Inventory = inventory;
 	}
-	public void equipWeaponFromInventory(int i)
-	{
-		if (i <= this.getInventory().getItemsInWeaponsPocket()){
+
+	public void equipWeaponFromInventory(int i) {
+		if (i <= this.getInventory().getItemsInWeaponsPocket()) {
 			if (this.equippedWeapon == null) {
 				this.equippedWeapon = this.getInventory().accessWeaponInPocket(i);
 				this.getInventory().dropWeapon(i);
-			}
-			else {
+			} else {
 				items.Weapon actualEquippedWeapon = this.equippedWeapon;
 				this.equippedWeapon = this.getInventory().accessWeaponInPocket(i);
 				this.getInventory().dropWeapon(i);
 				this.getInventory().addWeaponInPocket(actualEquippedWeapon);
 			}
-		}
-		else {
+		} else {
 			System.err.println("Vous n'avez pas d'objet a cet endroit !");
 			return;
 		}
-	}	
-	public void equipArtefactFromInventory(int i)
-	{
-		if (i <= this.getInventory().getItemsInArtefactsPocket()){
+	}
+
+	public void equipArtefactFromInventory(int i) {
+		if (i <= this.getInventory().getItemsInArtefactsPocket()) {
 			if (this.equippedArtefact == null) {
 				this.equippedArtefact = this.getInventory().accessArtefactInPocket(i);
 				this.getInventory().dropArtefact(i);
-			}
-			else {
+			} else {
 				items.Artefact actualEquippedArtefact = this.equippedArtefact;
 				this.equippedArtefact = this.getInventory().accessArtefactInPocket(i);
 				this.getInventory().dropArtefact(i);
 				this.getInventory().addArtefactInPocket(actualEquippedArtefact);
 			}
-		}
-		else {
+		} else {
 			System.err.println("Vous n'avez pas d'objet a cet endroit !");
 			return;
 		}
 	}
-	public void equipArmorFromInventory()
-	{
-		if (this.getInventory().getSpareArmor() != null){
+
+	public void equipArmorFromInventory() {
+		if (this.getInventory().getSpareArmor() != null) {
 			if (this.equippedArmor == null) {
 				this.equippedArmor = this.getInventory().getSpareArmor();
 				this.getInventory().setSpareArmor(null);
-			}
-			else {
+			} else {
 				items.Armor actualEquippedArmor = this.equippedArmor;
 				this.equippedArmor = this.getInventory().getSpareArmor();
 				this.getInventory().setSpareArmor(actualEquippedArmor);
 			}
-		}
-		else {
+		} else {
 			System.err.println("Vous n'avez pas d'objet a cet endroit !");
 			return;
 		}
 	}
-	
-	public void levelUp()
-	{
-		if (this.XP >= this.Level*10)
-		{
-			this.XP -= this.Level*10;
+
+	public void levelUp() {
+		if (this.XP >= this.Level * 10) {
+			this.XP -= this.Level * 10;
 			this.Level += 1;
+		}
+	}
+
+	public void usePotion(items.Potion potion) {
+		this.setHP(this.getHP()+potion.getHealthValue());
+		if (this.getHP() > this.getMaxHP())
+			this.setHP(this.getMaxHP());
+	}
+	
+	public void showInventory(Scanner scanner) {
+		while (true) {
+			System.out.println("----------------------------------");
+			System.out.println("Quel poche voulez-vous regarder ?");
+			System.out.println("armor; artefact; potion; weapon; exit");
+			String prompt = scanner.nextLine();
+			switch (prompt) {
+				case "armor":
+					showSpareArmor(scanner);
+					continue;
+				case "artefact":
+					showArtefactPocket(scanner);
+					continue;
+				case "potion":
+					showPotionPocket(scanner);
+					continue;
+				case "weapon":
+					showWeaponPocket(scanner);
+					continue;
+				case "exit":
+					return;
+				default:
+					System.out.println("Commande introuvable, Veuillez Réessayer.");
+					continue;
+			}
+		}
+	}
+
+	public void showSpareArmor(Scanner scanner) {
+		while (true) {
+			System.out.println("----------------------------------");
+			if (this.getInventory().getSpareArmor() == null) {
+				System.out.println("Vous n'avez pas d'armure dans votre inventaire.");
+				Misc.wait(1000);
+				return;
+			}
+			System.out.println(this.getInventory().getSpareArmor());
+			System.out.println("equip ; drop ; exit");
+			String prompt = scanner.nextLine();
+			switch (prompt) {
+				case "equip":
+					System.out.printf("Vous avez équipé %s.\n", this.getInventory().getSpareArmor().getName());
+					Misc.wait(1000);
+					this.equipArmorFromInventory();
+					break;
+				case "drop":
+					System.out.printf("Vous avez jeté %s.\n", this.getInventory().getSpareArmor().getName());
+					Misc.wait(1000);
+					this.getInventory().setSpareArmor(null);
+					break;
+				case "exit":
+					return;
+				default:
+					System.out.println("Commande introuvable, Veuillez Réessayer.");
+					continue;
+			}
+		}
+	}
+
+	public void showArtefactPocket(Scanner scanner) {
+		while (true) {
+			System.out.println("----------------------------------");
+			if (this.getInventory().getItemsInArtefactsPocket() == 0) {
+				System.out.println("Vous n'avez pas d'artefacts dans votre inventaire.");
+				Misc.wait(1000);
+				return;
+			}
+			for (int numberOfItems = 1; numberOfItems <= this.getInventory()
+					.getItemsInArtefactsPocket(); ++numberOfItems) {
+				System.out.printf("%d : %s\n", numberOfItems,this.getInventory().accessArtefactInPocket(numberOfItems).getName());
+				System.out.println("Choisissez l'objet (numéro) avec lequel vous souhaitez interagir.");
+				int promptInt = Integer.parseInt(scanner.nextLine());
+				if (promptInt > this.getInventory().getItemsInArtefactsPocket()) {
+					System.out.println("Objet inexistant. Veuillez réessayer");
+					continue;
+				}
+				showArtefact(scanner,promptInt);
+			}
+		}
+	}
+	
+	public void showArtefact(Scanner scanner, int promptInt)
+	{
+		while(true) {
+			System.out.println("----------------------------------");
+			System.out.println(this.getInventory().accessArtefactInPocket(promptInt));
+			System.out.println("equip ; drop ; exit");
+			String prompt = scanner.nextLine();
+			switch (prompt) {
+			case "equip":
+				System.out.printf("Vous avez équipé %s.\n",this.getInventory().accessArtefactInPocket(promptInt).getName());
+				Misc.wait(1000);
+				this.equipArtefactFromInventory(promptInt);
+				return;
+			case "drop":
+				System.out.printf("Vous avez jeté %s.\n",this.getInventory().accessArtefactInPocket(promptInt).getName());
+				Misc.wait(1000);
+				this.getInventory().dropArtefact(promptInt);
+				return;
+			case "exit":
+				return;
+			default:
+				System.out.println("Commande introuvable, Veuillez Réessayer.");
+				continue;
+			}
+		}
+	}
+	
+	public void showWeaponPocket(Scanner scanner) {
+		while (true) {
+			System.out.println("----------------------------------");
+			if (this.getInventory().getItemsInWeaponsPocket() == 0) {
+				System.out.println("Vous n'avez pas d'armes dans votre inventaire.");
+				Misc.wait(1000);
+				return;
+			}
+			for (int numberOfItems = 1; numberOfItems <= this.getInventory()
+					.getItemsInWeaponsPocket(); ++numberOfItems) {
+				System.out.printf("%d : %s\n", numberOfItems,this.getInventory().accessWeaponInPocket(numberOfItems).getName());
+				System.out.println("Choisissez l'objet (numéro) avec lequel vous souhaitez interagir.");
+				int promptInt = Integer.parseInt(scanner.nextLine());
+				if (promptInt > this.getInventory().getItemsInWeaponsPocket()) {
+					System.out.println("Objet inexistant. Veuillez réessayer");
+					continue;
+				}
+				showWeapon(scanner,promptInt);
+			}
+		}
+	}
+	
+	public void showWeapon(Scanner scanner, int promptInt)
+	{
+		while(true) {
+			System.out.println("----------------------------------");
+			System.out.println(this.getInventory().accessWeaponInPocket(promptInt));
+			System.out.println("equip ; drop ; exit");
+			String prompt = scanner.nextLine();
+			switch (prompt) {
+			case "equip":
+				System.out.printf("Vous avez équipé %s.\n",this.getInventory().accessWeaponInPocket(promptInt).getName());
+				Misc.wait(1000);
+				this.equipWeaponFromInventory(promptInt);
+				return;
+			case "drop":
+				System.out.printf("Vous avez jeté %s.\n",this.getInventory().accessWeaponInPocket(promptInt).getName());
+				Misc.wait(1000);
+				this.getInventory().dropWeapon(promptInt);
+				return;
+			case "exit":
+				return;
+			default:
+				System.out.println("Commande introuvable, Veuillez Réessayer.");
+				continue;
+			}
+		}
+	}
+	
+	public void showPotionPocket(Scanner scanner) {
+		while (true) {
+			System.out.println("----------------------------------");
+			if (this.getInventory().getItemsInPotionsPocket() == 0) {
+				System.out.println("Vous n'avez pas de potions dans votre inventaire.");
+				Misc.wait(1000);
+				return;
+			}
+			for (int numberOfItems = 1; numberOfItems <= this.getInventory()
+					.getItemsInPotionsPocket(); ++numberOfItems) {
+				System.out.printf("%d : %s\n", numberOfItems,this.getInventory().accessPotionInPocket(numberOfItems).getName());
+				System.out.println("Choisissez l'objet (numéro) avec lequel vous souhaitez interagir.");
+				int promptInt = Integer.parseInt(scanner.nextLine());
+				if (promptInt > this.getInventory().getItemsInPotionsPocket()) {
+					System.out.println("Objet inexistant. Veuillez réessayer");
+					continue;
+				}
+				showPotion(scanner,promptInt);
+			}
+		}
+	}
+	
+	public void showPotion(Scanner scanner, int promptInt)
+	{
+		while(true) {
+			System.out.println("----------------------------------");
+			System.out.println(this.getInventory().accessPotionInPocket(promptInt));
+			System.out.println("use ; drop ; exit");
+			String prompt = scanner.nextLine();
+			switch (prompt) {
+			case "use":
+				this.usePotion(this.getInventory().accessPotionInPocket(promptInt));
+				System.out.printf("Vous avez bu %s, vous avez maintenant %d PV.\n",this.getInventory().accessPotionInPocket(promptInt).getName(),this.getHP());
+				this.getInventory().dropPotion(promptInt);
+				Misc.wait(1000);
+				return;
+			case "drop":
+				System.out.printf("Vous avez jeté %s.\n",this.getInventory().accessPotionInPocket(promptInt).getName());
+				Misc.wait(1000);
+				this.getInventory().dropPotion(promptInt);
+				return;
+			case "exit":
+				return;
+			default:
+				System.out.println("Commande introuvable, Veuillez Réessayer.");
+				continue;
+			}
 		}
 	}
 }
