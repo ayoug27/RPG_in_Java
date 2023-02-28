@@ -31,14 +31,14 @@ public class Tile {
     		int iItemType = Misc.diceRoll(4,1);
     		switch (iItemType) {
     			case 1:
-    				chest[i] = Database.ARMOR_DATABASE[iRarity][Misc.diceRoll(Database.ARMOR_DATABASE[iRarity].length-1,0)];
+    				chest[i] = Database.ARMOR_DATABASE[iRarity][Misc.diceRoll(Database.ARMOR_DATABASE[iRarity].length-1,0)]; break;
     			case 2:
-    				chest[i] = Database.ARMOR_DATABASE[iRarity][Misc.diceRoll(Database.ARMOR_DATABASE[iRarity].length-1,0)];
+    				chest[i] = Database.ARMOR_DATABASE[iRarity][Misc.diceRoll(Database.ARMOR_DATABASE[iRarity].length-1,0)]; break;
 //					chest[i] = Database.ARTEFACT_DATABASE[iRarity][Misc.diceRoll(Database.ARTEFACT_DATABASE[iRarity].length-1,0)];
     			case 3:
-					chest[i] = Database.POTION_DATABASE[iRarity][Misc.diceRoll(Database.POTION_DATABASE[iRarity].length-1,0)];
+					chest[i] = Database.POTION_DATABASE[iRarity][Misc.diceRoll(Database.POTION_DATABASE[iRarity].length-1,0)]; break;
     			case 4:
-					chest[i] = Database.WEAPON_DATABASE[iRarity][Misc.diceRoll(Database.WEAPON_DATABASE[iRarity].length-1,0)];
+					chest[i] = Database.WEAPON_DATABASE[iRarity][Misc.diceRoll(Database.WEAPON_DATABASE[iRarity].length-1,0)]; break;
     		}
     	}
     	return chest;
