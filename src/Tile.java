@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;  
 import java.lang.*;
 import entities.Ennemy;
-import items.Item;
+import items.*;
 import miscellaneous.Misc;
 
 public class Tile {
@@ -40,13 +40,21 @@ public class Tile {
     		int iItemType = Misc.diceRoll(4,1);
     		switch (iItemType) {
     			case 1:
-    				chest[i] = Database.ARMOR_DATABASE[iRarity][Misc.diceRoll(Database.ARMOR_DATABASE[iRarity].length-1,0)]; break;
+    				items.Armor armor = Database.ARMOR_DATABASE[iRarity][Misc.diceRoll(Database.ARMOR_DATABASE[iRarity].length-1,0)];
+    				chest[i] = new items.Armor(armor.getName(),armor.getRarity(),armor.getDefense());
+    				break;
     			case 2:
-					chest[i] = Database.ARTEFACT_DATABASE[iRarity][Misc.diceRoll(Database.ARTEFACT_DATABASE[iRarity].length-1,0)]; break;
+    				items.Artefact artefact = Database.ARTEFACT_DATABASE[iRarity][Misc.diceRoll(Database.ARTEFACT_DATABASE[iRarity].length-1,0)]; 
+    				chest[i] = new items.Artefact(artefact.getName(), artefact.getRarity(), artefact.getBuffedAbility(), artefact.getBuffValue());
+    				break;
     			case 3:
-					chest[i] = Database.POTION_DATABASE[iRarity][Misc.diceRoll(Database.POTION_DATABASE[iRarity].length-1,0)]; break;
+    				items.Potion potion = Database.POTION_DATABASE[iRarity][Misc.diceRoll(Database.POTION_DATABASE[iRarity].length-1,0)];
+    				chest[i] = new items.Potion(potion.getName(),potion.getRarity(),potion.getHealthValue());
+    				break;
     			case 4:
-					chest[i] = Database.WEAPON_DATABASE[iRarity][Misc.diceRoll(Database.WEAPON_DATABASE[iRarity].length-1,0)]; break;
+    				items.Weapon weapon = Database.WEAPON_DATABASE[iRarity][Misc.diceRoll(Database.WEAPON_DATABASE[iRarity].length-1,0)];
+    				chest[i] = new items.Weapon(weapon.getName(),weapon.getRarity(),weapon.getAttack());
+    				break;
     		}
     	}
     	return chest;
@@ -54,10 +62,11 @@ public class Tile {
     
     entities.Ennemy generateEnnemy(){
     	int iRarity = getIndexOfRarity();
-    	return Database.ENNEMY_DATABASE[iRarity][Misc.diceRoll(Database.ENNEMY_DATABASE[iRarity].length-1, 0)];
+    	ennemy = Database.ENNEMY_DATABASE[iRarity][Misc.diceRoll(Database.ENNEMY_DATABASE[iRarity].length-1, 0)];
+    	return new Ennemy(ennemy.getHP(),ennemy.getBaseAttack(),ennemy.getBaseDefense(),ennemy.getBaseSpeed(),ennemy.getName(),ennemy.getDescription(),ennemy.getRarity(),ennemy.getMinXPGiven(),ennemy.getMaxXPGiven(),ennemy.isBoss());
     }
 
-    public Tile(boolean isAccessible, boolean hasEnnemy, boolean hasChest, String rarity) {
+    public Tile(boolean isAccessible, boolean hasEnnemy, boolean hasChest, String rarity, entities.Hero Hero) {
 		super();
 		this.isAccessible = isAccessible;
 		this.hasEnnemy = hasEnnemy;
@@ -67,25 +76,40 @@ public class Tile {
 			Chest = generateChest();
 		else
 			Chest = null;
-		if (this.hasEnnemy)
+		if (this.hasEnnemy) {
 			this.ennemy = generateEnnemy();
-		else
+			this.fight = new Fight(Hero,this.ennemy,false);
+		}
+		else {
 			this.ennemy = null;
-		this.fight = null;
+			this.fight = null;
+		}
 	}
     
-    public void removeFromChest(int i){
-    	int I = i-1;
+    public Item getItemFromChest(int i) {
+    	int index = i-1;
+        Item item = this.Chest[index];
+        if (item.getClass() == Armor.class) {
+            return (Armor) item;
+        } else if (item.getClass() == Weapon.class) {
+            return (Weapon) item;
+        } else if (item.getClass() == Artefact.class) {
+            return (Artefact) item;
+        } else {
+            return null;
+        }
+    }
+    
+    public void removeFromChest(int index){
 		items.Item[] newChest = new items.Item[this.Chest.length-1];
-		int j = 0;
-		int k = 0;
-		while (j < newChest.length) {
-			if (k == I)
+		for (int i = 0, k = 0; i < newChest.length;){
+			if (this.Chest[k].equals(this.getItemFromChest(index))) {
 				++k;
-			newChest[j]=this.Chest[k];
-			++j;
+			}
+			newChest[i]=this.Chest[k];
+			++i;
 			++k;
-		}			
+		}
 		this.Chest = newChest;
     }
 }

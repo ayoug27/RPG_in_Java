@@ -150,11 +150,11 @@ public class Hero extends Entity {
 	public void equipWeaponFromInventory(int i) {
 		if (i <= this.getInventory().getItemsInWeaponsPocket()) {
 			if (this.equippedWeapon == null) {
-				this.equippedWeapon = this.getInventory().accessWeaponInPocket(i);
+				this.setEquippedWeapon(this.getInventory().accessWeaponInPocket(i));
 				this.getInventory().dropWeapon(i);
 			} else {
 				items.Weapon actualEquippedWeapon = this.equippedWeapon;
-				this.equippedWeapon = this.getInventory().accessWeaponInPocket(i);
+				this.setEquippedWeapon(this.getInventory().accessWeaponInPocket(i));
 				this.getInventory().dropWeapon(i);
 				this.getInventory().addWeaponInPocket(actualEquippedWeapon);
 			}
@@ -167,11 +167,11 @@ public class Hero extends Entity {
 	public void equipArtefactFromInventory(int i) {
 		if (i <= this.getInventory().getItemsInArtefactsPocket()) {
 			if (this.equippedArtefact == null) {
-				this.equippedArtefact = this.getInventory().accessArtefactInPocket(i);
+				this.setEquippedArtefact(this.getInventory().accessArtefactInPocket(i));
 				this.getInventory().dropArtefact(i);
 			} else {
 				items.Artefact actualEquippedArtefact = this.equippedArtefact;
-				this.equippedArtefact = this.getInventory().accessArtefactInPocket(i);
+				this.setEquippedArtefact(this.getInventory().accessArtefactInPocket(i));
 				this.getInventory().dropArtefact(i);
 				this.getInventory().addArtefactInPocket(actualEquippedArtefact);
 			}
@@ -184,11 +184,11 @@ public class Hero extends Entity {
 	public void equipArmorFromInventory() {
 		if (this.getInventory().getSpareArmor() != null) {
 			if (this.equippedArmor == null) {
-				this.equippedArmor = this.getInventory().getSpareArmor();
+				this.setEquippedArmor(this.getInventory().getSpareArmor());
 				this.getInventory().setSpareArmor(null);
 			} else {
 				items.Armor actualEquippedArmor = this.equippedArmor;
-				this.equippedArmor = this.getInventory().getSpareArmor();
+				this.setEquippedArmor(this.getInventory().getSpareArmor());
 				this.getInventory().setSpareArmor(actualEquippedArmor);
 			}
 		} else {
@@ -313,8 +313,12 @@ public class Hero extends Entity {
 			for (int numberOfItems = 1; numberOfItems <= this.getInventory()
 					.getItemsInArtefactsPocket(); ++numberOfItems) {
 				System.out.printf("%d : %s\n", numberOfItems,this.getInventory().accessArtefactInPocket(numberOfItems).getName());
-				System.out.println("Choisissez l'objet (numéro) avec lequel vous souhaitez interagir.");
-				int promptInt = Integer.parseInt(scanner.nextLine());
+				System.out.println("Choisissez l'objet (numéro) avec lequel vous souhaitez interagir ou tapez exit.");
+				String prompt = scanner.nextLine();
+				if (prompt == "exit") {
+					return;
+				}
+				int promptInt = Integer.parseInt(prompt);
 				if (promptInt > this.getInventory().getItemsInArtefactsPocket()) {
 					System.out.println("Objet inexistant. Veuillez réessayer");
 					continue;
@@ -362,8 +366,12 @@ public class Hero extends Entity {
 			for (int numberOfItems = 1; numberOfItems <= this.getInventory()
 					.getItemsInWeaponsPocket(); ++numberOfItems) {
 				System.out.printf("%d : %s\n", numberOfItems,this.getInventory().accessWeaponInPocket(numberOfItems).getName());
-				System.out.println("Choisissez l'objet (numéro) avec lequel vous souhaitez interagir.");
-				int promptInt = Integer.parseInt(scanner.nextLine());
+				System.out.println("Choisissez l'objet (numéro) avec lequel vous souhaitez interagir ou tapez exit.");
+				String prompt = scanner.nextLine();
+				if (prompt == "exit") {
+					return;
+				}
+				int promptInt = Integer.parseInt(prompt);
 				if (promptInt > this.getInventory().getItemsInWeaponsPocket()) {
 					System.out.println("Objet inexistant. Veuillez réessayer");
 					continue;
@@ -410,8 +418,11 @@ public class Hero extends Entity {
 			}
 			for (int numberOfItems = 1; numberOfItems <= this.getInventory().getItemsInPotionsPocket(); ++numberOfItems) {
 				System.out.printf("%d : %s\n", numberOfItems,this.getInventory().accessPotionInPocket(numberOfItems).getName());
-				System.out.println("Choisissez l'objet (numéro) avec lequel vous souhaitez interagir.");
-				int promptInt = Integer.parseInt(scanner.nextLine());
+				System.out.println("Choisissez l'objet (numéro) avec lequel vous souhaitez interagir ou tapez exit.");
+				String prompt = scanner.nextLine();
+				if (prompt == "exit")
+					return;
+				int promptInt = Integer.parseInt(prompt);
 				if (promptInt > this.getInventory().getItemsInPotionsPocket()) {
 					System.out.println("Objet inexistant. Veuillez réessayer");
 					continue;
@@ -447,5 +458,12 @@ public class Hero extends Entity {
 				continue;
 			}
 		}
+	}
+
+	public void showSkills(Scanner scanner) {
+		System.out.printf("PV : %d/%d\n",this.getHP(),this.getMaxHP());
+		System.out.println("Attaque : "+this.getAttack());
+		System.out.println("Défense : "+this.getDefense());
+		System.out.println("Vitesse : "+this.getSpeed());
 	}
 }
