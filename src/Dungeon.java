@@ -116,7 +116,7 @@ public class Dungeon {
 				System.out.print("up; down; left; right; ");
 				if (Dungeon[Hero.getY()][Hero.getX()].hasChest)
 					System.out.print("openChest; ");
-				System.out.print("map; inventory; skills\n");
+				System.out.print(" map; inventory; skills\n");
 				String prompt = scanner.nextLine();
 				switch (prompt.toLowerCase()) {
 				case "up":
