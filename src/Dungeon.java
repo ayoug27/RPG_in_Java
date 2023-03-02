@@ -174,7 +174,7 @@ public class Dungeon {
 					return;
 				default :
 					int promptInt = Integer.parseInt(prompt);
-					if (promptInt < Dungeon[Hero.getY()][Hero.getX()].Chest.length || promptInt > 0) {				
+					if (promptInt < Dungeon[Hero.getY()][Hero.getX()].Chest.length && promptInt > 0) {				
 						if (Dungeon[Hero.getY()][Hero.getX()].Chest[promptInt-1] instanceof items.Weapon && Hero.getInventory().getItemsInWeaponsPocket() <= Hero.getInventory().weaponsPocket.length) {
 							Hero.getInventory().addWeaponInPocket((items.Weapon) Dungeon[Hero.getY()][Hero.getX()].Chest[promptInt-1]);
 							Dungeon[Hero.getY()][Hero.getX()].removeFromChest(promptInt);
