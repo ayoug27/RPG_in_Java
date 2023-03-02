@@ -113,9 +113,12 @@ public class Dungeon {
 				System.out.println("Que voulez-vous faire ?");
 				if (Dungeon[Hero.getY()][Hero.getX()].hasChest)
 					System.out.println("Il y a un coffre.");
-				System.out.println("up; down; left; right; openChest; map ; inventory; skills");
+				System.out.print("up; down; left; right; ");
+				if (Dungeon[Hero.getY()][Hero.getX()].hasChest)
+					System.out.print("openChest; ");
+				System.out.print("map; inventory; skills\n");
 				String prompt = scanner.nextLine();
-				switch (prompt) {
+				switch (prompt.toLowerCase()) {
 				case "up":
 					heroMoveUp(); continue;
 				case "down":
@@ -124,7 +127,7 @@ public class Dungeon {
 					heroMoveLeft(); continue;
 				case "right":
 					heroMoveRight(); continue;
-				case "openChest":
+				case "openchest":
 					if (Dungeon[Hero.getY()][Hero.getX()].hasChest)
 						openChest(scanner);
 					else
@@ -173,7 +176,13 @@ public class Dungeon {
 				case "exit" :
 					return;
 				default :
-					int promptInt = Integer.parseInt(prompt);
+					int promptInt;
+					try {
+				        promptInt = Integer.parseInt(prompt);
+				    } catch (NumberFormatException e) {
+				        System.out.println("C'est pas un nombre !");
+				    	continue;
+				    }
 					if (promptInt < Dungeon[Hero.getY()][Hero.getX()].Chest.length || promptInt > 0) {				
 						if (Dungeon[Hero.getY()][Hero.getX()].Chest[promptInt-1] instanceof items.Weapon && Hero.getInventory().getItemsInWeaponsPocket() <= Hero.getInventory().weaponsPocket.length) {
 							Hero.getInventory().addWeaponInPocket((items.Weapon) Dungeon[Hero.getY()][Hero.getX()].Chest[promptInt-1]);

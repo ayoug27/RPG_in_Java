@@ -81,7 +81,7 @@ public class Hero extends Entity {
 		int itemAttack = 0;
 		if (this.equippedWeapon != null)
 			itemAttack += this.equippedWeapon.getAttack();
-		if (this.equippedArtefact != null && this.equippedArtefact.getBuffedAbility() == "Attack")
+		if (this.equippedArtefact != null && this.equippedArtefact.getBuffedAbility().equals("Attack"))
 			itemAttack += this.equippedArtefact.getBuffValue();
 		Attack = this.getBaseAttack() + itemAttack;
 	}
@@ -94,7 +94,7 @@ public class Hero extends Entity {
 		int itemDefense = 0;
 		if (this.equippedArmor != null)
 			itemDefense += this.equippedArmor.getDefense();
-		if (this.equippedArtefact != null && this.equippedArtefact.getBuffedAbility() == "Defense")
+		if (this.equippedArtefact != null && this.equippedArtefact.getBuffedAbility().equals("Defense"))
 			itemDefense += this.equippedArtefact.getBuffValue();
 		Defense = this.getBaseDefense() + itemDefense;
 	}
@@ -105,7 +105,7 @@ public class Hero extends Entity {
 
 	public void setSpeed() {
 		int itemSpeed = 0;
-		if (this.equippedArtefact != null && this.equippedArtefact.getBuffedAbility() == "Speed")
+		if (this.equippedArtefact != null && this.equippedArtefact.getBuffedAbility().equals("Speed"))
 			itemSpeed += this.equippedArtefact.getBuffValue();
 		Speed = this.getBaseSpeed() + itemSpeed;
 	}
@@ -214,7 +214,7 @@ public class Hero extends Entity {
 			System.out.println("hp; attack; defense; speed");
 			Scanner scanner = new Scanner(System.in);
 			String prompt = scanner.nextLine();
-			switch (prompt) {
+			switch (prompt.toLowerCase()) {
 			case "hp" :
 				this.setMaxHP(this.getMaxHP()+5*(int)(level/2)); 
 				System.out.println("Vous vous sentez plus résistant ! Votre vie maximale est à "+this.getMaxHP());
@@ -249,7 +249,7 @@ public class Hero extends Entity {
 			System.out.println("Quel poche voulez-vous regarder ?");
 			System.out.println("armor; artefact; potion; weapon; exit");
 			String prompt = scanner.nextLine();
-			switch (prompt) {
+			switch (prompt.toLowerCase()) {
 				case "armor":
 					showSpareArmor(scanner);
 					continue;
@@ -282,7 +282,7 @@ public class Hero extends Entity {
 			System.out.println(this.getInventory().getSpareArmor());
 			System.out.println("equip ; drop ; exit");
 			String prompt = scanner.nextLine();
-			switch (prompt) {
+			switch (prompt.toLowerCase()) {
 				case "equip":
 					System.out.printf("Vous avez équipé %s.\n", this.getInventory().getSpareArmor().getName());
 					Misc.wait(1000);
@@ -315,10 +315,16 @@ public class Hero extends Entity {
 				System.out.printf("%d : %s\n", numberOfItems,this.getInventory().accessArtefactInPocket(numberOfItems).getName());
 				System.out.println("Choisissez l'objet (numéro) avec lequel vous souhaitez interagir ou tapez exit.");
 				String prompt = scanner.nextLine();
-				if (prompt == "exit") {
+				if (prompt.toLowerCase().equals("exit")) {
 					return;
 				}
-				int promptInt = Integer.parseInt(prompt);
+				int promptInt;
+				try {
+			        promptInt = Integer.parseInt(prompt);
+			    } catch (NumberFormatException e) {
+			        System.out.println("C'est pas un nombre !");
+			        continue;
+			    }
 				if (promptInt > this.getInventory().getItemsInArtefactsPocket()) {
 					System.out.println("Objet inexistant. Veuillez réessayer");
 					continue;
@@ -368,10 +374,16 @@ public class Hero extends Entity {
 				System.out.printf("%d : %s\n", numberOfItems,this.getInventory().accessWeaponInPocket(numberOfItems).getName());
 				System.out.println("Choisissez l'objet (numéro) avec lequel vous souhaitez interagir ou tapez exit.");
 				String prompt = scanner.nextLine();
-				if (prompt == "exit") {
+				if (prompt.toLowerCase().equals("exit")) {
 					return;
 				}
-				int promptInt = Integer.parseInt(prompt);
+				int promptInt;
+				try {
+			        promptInt = Integer.parseInt(prompt);
+			    } catch (NumberFormatException e) {
+			        System.out.println("C'est pas un nombre !");
+			        continue;
+			    }
 				if (promptInt > this.getInventory().getItemsInWeaponsPocket()) {
 					System.out.println("Objet inexistant. Veuillez réessayer");
 					continue;
@@ -420,9 +432,15 @@ public class Hero extends Entity {
 				System.out.printf("%d : %s\n", numberOfItems,this.getInventory().accessPotionInPocket(numberOfItems).getName());
 				System.out.println("Choisissez l'objet (numéro) avec lequel vous souhaitez interagir ou tapez exit.");
 				String prompt = scanner.nextLine();
-				if (prompt == "exit")
+				if (prompt.toLowerCase().equals("exit"))
 					return;
-				int promptInt = Integer.parseInt(prompt);
+				int promptInt;
+				try {
+			        promptInt = Integer.parseInt(prompt);
+			    } catch (NumberFormatException e) {
+			        System.out.println("C'est pas un nombre !");
+			        continue;
+			    }
 				if (promptInt > this.getInventory().getItemsInPotionsPocket()) {
 					System.out.println("Objet inexistant. Veuillez réessayer");
 					continue;
