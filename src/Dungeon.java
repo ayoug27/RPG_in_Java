@@ -14,7 +14,6 @@ public class Dungeon {
 		try {
 			fr = new FileReader(file);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		BufferedReader br = new BufferedReader(fr);
@@ -27,7 +26,6 @@ public class Dungeon {
 				++j;
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Tile[][] dungeonTile = new Tile[23][23];
@@ -38,25 +36,25 @@ public class Dungeon {
 				else if (dungeon[y][x] == 'P')
 					dungeonTile[y][x] = new Tile(true, false, true, "Common",Hero);
 				else if (dungeon[y][x] == 'c')
-					dungeonTile[y][x] = new Tile(true, true, false, "Common",Hero);
+					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(3), false, "Common",Hero);
 				else if (dungeon[y][x] == 'C')
-					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(1), true, "Common",Hero);
+					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(3), true, "Common",Hero);
 				else if (dungeon[y][x] == 'u')
-					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(1), false, "Uncommon",Hero);
+					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(3), false, "Uncommon",Hero);
 				else if (dungeon[y][x] == 'U')
-					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(1), true, "Uncommon",Hero);
+					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(3), true, "Uncommon",Hero);
 				else if (dungeon[y][x] == 'r')
-					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(1), false, "Rare",Hero);
+					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(3), false, "Rare",Hero);
 				else if (dungeon[y][x] == 'R')
-					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(1), true, "Rare",Hero);
+					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(3), true, "Rare",Hero);
 				else if (dungeon[y][x] == 'e')
-					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(1), false, "Epic",Hero);
+					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(3), false, "Epic",Hero);
 				else if (dungeon[y][x] == 'E')
-					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(1), true, "Epic",Hero);
+					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(3), true, "Epic",Hero);
 				else if (dungeon[y][x] == 'l')
-					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(1), false, "Legendary",Hero);
+					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(3), false, "Legendary",Hero);
 				else if (dungeon[y][x] == 'L')
-					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(1), true, "Legendary",Hero);
+					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(3), true, "Legendary",Hero);
 				else if (dungeon[y][x] == 'm')
 					dungeonTile[y][x] = new Tile(true, false, false, "Mythic",Hero);
 				else if (dungeon[y][x] == 'M')
@@ -111,10 +109,10 @@ public class Dungeon {
 			}
 			else {
 				System.out.println("Que voulez-vous faire ?");
-				if (Dungeon[Hero.getY()][Hero.getX()].hasChest)
+				if (Dungeon[Hero.getY()][Hero.getX()].hasChest && Dungeon[Hero.getY()][Hero.getX()].Chest.length != 0)
 					System.out.println("Il y a un coffre.");
 				System.out.print("up; down; left; right; ");
-				if (Dungeon[Hero.getY()][Hero.getX()].hasChest)
+				if (Dungeon[Hero.getY()][Hero.getX()].hasChest && Dungeon[Hero.getY()][Hero.getX()].Chest.length != 0)
 					System.out.print("openChest; ");
 				System.out.print(" map; inventory; skills\n");
 				String prompt = scanner.nextLine();
@@ -128,7 +126,7 @@ public class Dungeon {
 				case "right":
 					heroMoveRight(); continue;
 				case "openchest":
-					if (Dungeon[Hero.getY()][Hero.getX()].hasChest)
+					if (Dungeon[Hero.getY()][Hero.getX()].hasChest && Dungeon[Hero.getY()][Hero.getX()].Chest.length != 0)
 						openChest(scanner);
 					else
 						System.out.println("Il n'y a pas de coffre ici.");
@@ -149,9 +147,9 @@ public class Dungeon {
 		for (int Y = 0; Y < Dungeon.length; ++Y) {
 			for (int X = 0; X < Dungeon[Y].length; ++X) {
 				if(X == Hero.getX() && Y == Hero.getY()) {
-					System.out.print('P'); continue;}
+					System.out.print(Misc.ANSI_GREEN+'P'+Misc.ANSI_RESET); continue;}
 				if (Dungeon[Y][X].hasEnnemy && Dungeon[Y][X].ennemy.isBoss()) {
-					System.out.print('B'); continue;}
+					System.out.print(Misc.ANSI_RED+'B'+Misc.ANSI_RESET); continue;}
 				if (Dungeon[Y][X].isAccessible) {
 					System.out.print(' '); continue;}
 				else {

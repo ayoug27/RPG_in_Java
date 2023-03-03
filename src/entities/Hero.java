@@ -18,7 +18,7 @@ public class Hero extends Entity {
 	private entities.Inventory Inventory;
 
 	public Hero(int x, int y) {
-		super(10, 1, 1, 1);
+		super(10, 3, 3, 3);
 		maxHP = this.getHP();
 		X = x;
 		Y = y;
@@ -27,9 +27,9 @@ public class Hero extends Entity {
 		this.equippedWeapon = null;
 		this.equippedArmor = null;
 		this.equippedArtefact = null;
-		Attack = 1;
-		Defense = 1;
-		Speed = 1;
+		Attack = this.getBaseAttack();
+		Defense = this.getBaseDefense();
+		Speed = this.getBaseSpeed();
 		Inventory = new Inventory();
 	}
 	
@@ -220,16 +220,19 @@ public class Hero extends Entity {
 				System.out.println("Vous vous sentez plus résistant ! Votre vie maximale est à "+this.getMaxHP());
 				return;
 			case "attack":
-				this.setBaseAttack(this.getAttack()+(int)(level/2)); 
+				this.setBaseAttack(this.getBaseAttack()+(int)(level/2)); 
 				System.out.println("Vous vous sentez plus fort ! Votre attaque est à "+this.getBaseAttack());
+				this.setAttack();
 				return;
 			case "defense":
-				this.setBaseDefense(this.getDefense()+(int)(level/2)); 
+				this.setBaseDefense(this.getBaseDefense()+(int)(level/2)); 
 				System.out.println("Vous vous sentez plus résistant ! Votre défense est à "+this.getBaseDefense());
+				this.setDefense();
 				return;       	
 			case "speed":
-				this.setBaseAttack(this.getAttack()+(int)(level/2)); 
+				this.setBaseSpeed(this.getBaseSpeed()+(int)(level/2)); 
 				System.out.println("Vous vous sentez plus vif et rapide ! Votre vitesse est à "+this.getBaseSpeed());
+				this.setSpeed();
 				return;
 			default:
 				System.out.println("Commande inexistante. Veuillez réessayer."); continue;
