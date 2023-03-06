@@ -36,25 +36,25 @@ public class Dungeon {
 				else if (dungeon[y][x] == 'P')
 					dungeonTile[y][x] = new Tile(true, false, true, "Common",Hero);
 				else if (dungeon[y][x] == 'c')
-					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(3), false, "Common",Hero);
+					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(2), false, "Common",Hero);
 				else if (dungeon[y][x] == 'C')
-					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(3), true, "Common",Hero);
+					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(2), true, "Common",Hero);
 				else if (dungeon[y][x] == 'u')
-					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(3), false, "Uncommon",Hero);
+					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(2), false, "Uncommon",Hero);
 				else if (dungeon[y][x] == 'U')
-					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(3), true, "Uncommon",Hero);
+					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(2), true, "Uncommon",Hero);
 				else if (dungeon[y][x] == 'r')
-					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(3), false, "Rare",Hero);
+					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(2), false, "Rare",Hero);
 				else if (dungeon[y][x] == 'R')
 					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(3), true, "Rare",Hero);
 				else if (dungeon[y][x] == 'e')
-					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(3), false, "Epic",Hero);
+					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(2), false, "Epic",Hero);
 				else if (dungeon[y][x] == 'E')
-					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(3), true, "Epic",Hero);
+					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(2), true, "Epic",Hero);
 				else if (dungeon[y][x] == 'l')
-					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(3), false, "Legendary",Hero);
+					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(2), false, "Legendary",Hero);
 				else if (dungeon[y][x] == 'L')
-					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(3), true, "Legendary",Hero);
+					dungeonTile[y][x] = new Tile(true, Misc.booleanDiceRoll(2), true, "Legendary",Hero);
 				else if (dungeon[y][x] == 'm')
 					dungeonTile[y][x] = new Tile(true, false, false, "Mythic",Hero);
 				else if (dungeon[y][x] == 'M')
@@ -68,16 +68,16 @@ public class Dungeon {
 
 	public static void heroMoveUp()
 	{
-		if (Dungeon[Hero.getY()+1][Hero.getX()].isAccessible)
-				Hero.setY(Hero.getY()+1);
+		if (Dungeon[Hero.getY()-1][Hero.getX()].isAccessible)
+				Hero.setY(Hero.getY()-1);
 		else
 			System.out.println("Vous ne pouvez pas aller ici !");
 	}
 	
 	public static void heroMoveDown()
 	{
-		if (Dungeon[Hero.getY()-1][Hero.getX()].isAccessible)
-				Hero.setY(Hero.getY()-1);
+		if (Dungeon[Hero.getY()+1][Hero.getX()].isAccessible)
+				Hero.setY(Hero.getY()+1);
 		else
 			System.out.println("Vous ne pouvez pas aller ici !");
 	}
@@ -157,6 +157,7 @@ public class Dungeon {
 			}
 			System.out.print('\n');
 		}
+		System.out.printf("Votre position : %d,%d\n",Hero.getX(),Hero.getY());
 		return;
 	}
 	

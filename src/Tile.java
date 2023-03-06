@@ -33,7 +33,7 @@ public class Tile {
     	return iRarity;
     }
     
-    items.Item[] generateChest(){
+    private items.Item[] generateChest(){
     	items.Item[] chest = new items.Item[Misc.diceRoll(5, 1)];
     	int iRarity = getIndexOfRarity();
     	for (int i = 0; i < chest.length; ++i) {
@@ -60,7 +60,7 @@ public class Tile {
     	return chest;
     }
     
-    entities.Ennemy generateEnnemy(){
+    private entities.Ennemy generateEnnemy(){
     	int iRarity = getIndexOfRarity();
     	ennemy = Database.ENNEMY_DATABASE[iRarity][Misc.diceRoll(Database.ENNEMY_DATABASE[iRarity].length-1, 0)];
     	return new Ennemy(ennemy.getHP(),ennemy.getBaseAttack(),ennemy.getBaseDefense(),ennemy.getBaseSpeed(),ennemy.getName(),ennemy.getDescription(),ennemy.getRarity(),ennemy.getMinXPGiven(),ennemy.getMaxXPGiven(),ennemy.isBoss());

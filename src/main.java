@@ -13,7 +13,6 @@ public class main {
 		// TODO Auto-generated method stub
 		Scanner scanner = new Scanner(System.in);
 		Dungeon.openGame(scanner);
-//		System.out.println(Database.ARTEFACT_DATABASE[0][0].getBuffedAbility());
 	}
 }
 
